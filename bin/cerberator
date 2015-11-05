@@ -1,0 +1,36 @@
+#! ruby
+
+require 'optparse'
+require 'cerberator'
+
+exit if defined?(Ocra)
+
+options = {}
+
+OptionParser.new do |opts|
+    opts.banner = "Usage: cerberator [options] <template>"
+
+    opts.on('-o', '--output [OUTPUT_FILE]', 'Path to write output to, defaults to the input file, minus the erb extension') do |path|
+        options["output"] = path
+    end
+
+    opts.on('-k', '--keys [KEY1,KEY2]', Array, 'Keys to provide to the template') do |keys|
+        options["keys"] = keys
+    end
+
+    opts.on_tail("-h", "--help", "Show this message.") do |setting|
+        puts opts.help
+        exit
+    end
+
+    opts.on_tail("-v", "--version", "Show version information") do
+        puts "Cerberator 1.0.0"
+        exit
+    end
+end.parse!
+
+template = ARGV.pop
+raise "Must provide input template!" unless template
+
+cerb = Cerberator::Cerberator.new(template, options["keys"], options["output"])
+cerb.run()
