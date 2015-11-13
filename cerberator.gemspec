@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
     s.homepage      = 'https://github.com/dstiert/cerberator'
     s.files         = Dir['lib/**/*', 'bin/*']
     s.executables << 'cerberator'
-    s.add_dependency 'diplomat', '~> 0.14.1'
+    s.add_dependency 'diplomat', '~> 0.15'
     s.add_development_dependency 'ocra'
     s.add_development_dependency 'rake'
 end
