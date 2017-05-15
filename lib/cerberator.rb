@@ -8,6 +8,9 @@ module Cerberator
             @template = template
             @keys = keys
             @output = output || File.join(File.dirname(template), File.basename(template, ".*"))
+            Diplomat.configure do |config|
+                config.url = 'http://127.0.0.1:8500'
+            end
         end
     
         def run()       
